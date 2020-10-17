@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Interview App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body ng-app="app" class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2>Conversions</h2>
+        <form ng-submit="addConversion()" ng-controller="conversionsCtrl">
+            <label>New conversion name</label>
+            <input class="form-control" type="text" ng-model="name" name="name" required>
+            <span class="d-block text-{{color}}">{{message}}</span>
+            <button class='btn btn-primary mt-3'>Add Conversion</button>
+        </form>
+        <h4>Get conversion data</h4>
+        <div ng-controller="conversionDataCtrl">
+          <form ng-submit="getConversionData($event)">
+            <label>Interesting in specific convertion? Write down the name or get all data</label>
+            <input class="form-control" type="text" ng-model="conversionName" name="conversionName">
+            <label>Start Date</label>
+            <input class="form-control" type="datetime-local" ng-model="from" name="from">
+            <label>End Date</label>
+            <input class="form-control" type="datetime-local" ng-model="to" name="to">
+            <button class='btn btn-success mt-3'>Get All Data</button> 
+            <button class='btn btn-info mt-3'>Get Data for specific conversion in range</button> 
+          </form>
+        <div>
+        <h6>{{infoMessage}}</h6>
+        <ul>
+          <li ng-repeat="item in items track by $index">name: {{ item.name }}. total conversions({{item.totalCalls}}) Time of calls:
+            <span ng-repeat="call in item.calls"> {{call}}, </span>
+          </li>
+        </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.6/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.6/ui-bootstrap-tpls.min.js"></script>
+
+<script src="app.js"></script>
+</html>
