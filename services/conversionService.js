@@ -32,10 +32,11 @@ const addConversionCall = async (conversionCallDTO) => {
                 await newAnalytics.save();
                 return true;
             }
-        }
+        } else {
+            throw new Error('No conversion for the given call!');
+        } 
     } catch (err) {
-        console.log(err);
-        return false
+        return err;
     }
 }
 

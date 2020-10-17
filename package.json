@@ -9,7 +9,7 @@
     "start-dashboard": "http-server public -p 3001"
   },
   "jest": {
-    "testEvnironment": "node"
+    "testEnvironment": "node"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "mongoose": "^5.4.13"
   },
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "supertest": "^3.4.1"
   }
 }

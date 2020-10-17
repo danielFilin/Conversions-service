@@ -59,6 +59,7 @@ app.controller('conversionDataCtrl', ['$scope', '$http', function($scope, $http)
   const getAllData = () => {
     $http.get("http://localhost:3000/conversions/getAllData")
     .then(function(response) {
+      console.log(response);
       if (response.data.data === 'No items to show!') {
         $scope.infoMessage = "No data to show for the given range!"
         return;

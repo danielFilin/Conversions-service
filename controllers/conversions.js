@@ -31,12 +31,16 @@ exports.conversionCall = async(req, res) => {
         if (!newQuery.validate()) {
             throw new Error ('data type is incorrect')
         }
-        await conversionService.addConversionCall(newQuery.query);
+        const result = await conversionService.addConversionCall(newQuery.query);
+        if (result !== undefined) {
+            throw new Error('call failed, conversion with the given name does not exist!')
+        }
         res.status(200).json({
             message: 'conversion call registered',
+            data: result
         });
     }   catch (err) {
-        res.status(200).json({
+        res.status(202).json({
             message: 'Ooops! Somethign went wrong!',
             err: err
         });
