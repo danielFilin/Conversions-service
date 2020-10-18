@@ -29,15 +29,15 @@
             <button class='btn btn-info mt-3'>Get Data for specific conversion in range</button> 
           </form>
         <div>
-        <h6 class="text-{{messageColor}}">{{infoMessage}}</h6>
-        <ul>
-          <li ng-repeat="item in items track by $index">Conversion Name: {{ item.name }}. Total number of conversions({{item.totalCalls}}) Time of calls:
-            <ol>
-              <li ng-repeat="call in item.calls"> {{call}}</li>
-            </ol>
-          </li>
-        </ul>
-            </div>
+          <h6 class="text-{{messageColor}}">{{infoMessage}}</h6>
+          <ul>
+            <li ng-repeat="item in items track by $index">Conversion Name: {{ item.name }}. Total number of conversions({{item.totalCalls}}) Time of calls:
+              <ol>
+                <li ng-repeat="call in item.calls"> {{call}}</li>
+              </ol>
+            </li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
