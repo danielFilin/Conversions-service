@@ -1,27 +1,23 @@
 var app = angular.module('app', []);
 
-// app.controller('controller', ['$scope', function($scope) {
-//   $scope.myFunc = function() {
-//   };
-// }]);
-
 app.controller('conversionsCtrl', ['$scope', '$http', function($scope, $http){
   $scope.message;
-  $scope.color;
+  $scope.messageColor;
   $scope.addConversion = function() {
     const newConversion = {
       name: this.name,
     }
     performConversion(newConversion);
+    this.name = '';
   }
   function performConversion(newConversion){
     $http.post("http://localhost:3000/conversions/addOne", newConversion)
     .then(function(response) {
       console.log(response)
       if (response.status !== 200) {
-        $scope.color = 'danger';
+        $scope.messageColor = 'danger';
       } else {
-        $scope.color = 'success';
+        $scope.messageColor = 'success';
       }
       $scope.message = response.data.message;
     }
@@ -36,6 +32,7 @@ app.controller('conversionDataCtrl', ['$scope', '$http', function($scope, $http)
   $scope.items;
   $scope.callTime = [];
   $scope.infoMessage;
+  $scope.messageColor;
   $scope.getConversionData = function(event) {
     $scope.items = [];
     $scope.callTime = [];
@@ -44,6 +41,7 @@ app.controller('conversionDataCtrl', ['$scope', '$http', function($scope, $http)
     }
 
     if (this.from === null || this.to === null || this.conversionName === undefined) {
+      $scope.messageColor = 'danger';
       $scope.infoMessage = 'Please enter date and conversion name!'
     } 
     const conversionsData = {
@@ -61,10 +59,13 @@ app.controller('conversionDataCtrl', ['$scope', '$http', function($scope, $http)
     .then(function(response) {
       console.log(response);
       if (response.data.data === 'No items to show!') {
+        $scope.messageColor = 'danger';
         $scope.infoMessage = "No data to show for the given range!"
         return;
       }
       $scope.infoMessage = "Please see the list with the availiable data:"
+      $scope.messageColor = 'success';
+
       $scope.items = response.data.data;
       for (let item of $scope.items){
         const time = [];
@@ -76,7 +77,7 @@ app.controller('conversionDataCtrl', ['$scope', '$http', function($scope, $http)
     })
     .catch(function(error) {
       console.log(error);
-    });;
+    });
   }
 
   const getDataInRange = (conversionsData) => {
@@ -89,18 +90,3 @@ app.controller('conversionDataCtrl', ['$scope', '$http', function($scope, $http)
     });;
   }
 }])
-
-// app.controller('loginComponent', ['$scope', '$http', function($scope, $http){
-//   $scope.login = function() {
-//     loginUser();
-//   };
-//   function loginUser() {
-//     $http.post("http://localhost:3000/user/login", '')
-//     .then(function(response) {
-//       console.log('Conversion added')
-//     })
-//     .catch(function(error) {
-//       console.log(error);
-//     });;
-//   }
-// }]);

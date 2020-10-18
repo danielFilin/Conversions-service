@@ -20,14 +20,8 @@ mongoose.connect(process.env.MONGODB_URL, {
 	reconnectInterval: 10000
 });
 
-//const port = process.env.PORT || 3000;
-
-//app.listen(port);
-
 index.use(bodyParser.json());
 index.use(bodyParser.urlencoded({extended: false}));
-  
-//console.log(`app running on port ${port}`);
 
 index.use('', conversionRoutes);
 

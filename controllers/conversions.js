@@ -33,6 +33,7 @@ exports.conversionCall = async(req, res) => {
         }
         const result = await conversionService.addConversionCall(newQuery.query);
         if (result !== undefined) {
+
             throw new Error('call failed, conversion with the given name does not exist!')
         }
         res.status(200).json({
@@ -70,7 +71,6 @@ exports.getAllData = async (req, res) => {
 exports.getData = async (req, res) => {
     try {
         const newQuery = new ConversionDataQuery (req);
-        console.log(newQuery.validate());
         if (!newQuery.validate()) {
             throw new Error ('data type is incorrect')
         }
@@ -81,8 +81,9 @@ exports.getData = async (req, res) => {
                 data: analytics,
                 message: 'data fetched!'
             })
-        } 
-        throw new Error ('no data found!');
+        }  else {
+            throw new Error ('no data found!');
+        }
     } catch (err) {
         res.status(204).json({
             message: 'No data availiable',

@@ -9,17 +9,17 @@
 <body ng-app="app" class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <h2>Conversions</h2>
+        <h2 class="text-center">Conversions</h2>
         <form ng-submit="addConversion()" ng-controller="conversionsCtrl">
             <label>New conversion name</label>
             <input class="form-control" type="text" ng-model="name" name="name" required>
-            <span class="d-block text-{{color}}">{{message}}</span>
+            <span class="d-block text-{{messageColor}}">{{message}}</span>
             <button class='btn btn-primary mt-3'>Add Conversion</button>
         </form>
-        <h4>Get conversion data</h4>
+        <h4 class="text-center mt-5">Get conversion data</h4>
         <div ng-controller="conversionDataCtrl">
           <form ng-submit="getConversionData($event)">
-            <label>Interesting in specific convertion? Write down the name or get all data</label>
+            <label>Interested in specific convertion? Write down name and date or simply get all avaliable data</label>
             <input class="form-control" type="text" ng-model="conversionName" name="conversionName">
             <label>Start Date</label>
             <input class="form-control" type="datetime-local" ng-model="from" name="from">
@@ -29,9 +29,9 @@
             <button class='btn btn-info mt-3'>Get Data for specific conversion in range</button> 
           </form>
         <div>
-        <h6>{{infoMessage}}</h6>
+        <h6 class="text-{{messageColor}}">{{infoMessage}}</h6>
         <ul>
-          <li ng-repeat="item in items track by $index">name: {{ item.name }}. total conversions({{item.totalCalls}}) Time of calls:
+          <li ng-repeat="item in items track by $index">Conversion Name: {{ item.name }}. Total number of conversions({{item.totalCalls}}) Time of calls:
             <span ng-repeat="call in item.calls"> {{call}}, </span>
           </li>
         </ul>
