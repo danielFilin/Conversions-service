@@ -32,7 +32,9 @@
         <h6 class="text-{{messageColor}}">{{infoMessage}}</h6>
         <ul>
           <li ng-repeat="item in items track by $index">Conversion Name: {{ item.name }}. Total number of conversions({{item.totalCalls}}) Time of calls:
-            <span ng-repeat="call in item.calls"> {{call}}, </span>
+            <ol>
+              <li ng-repeat="call in item.calls"> {{call}}</li>
+            </ol>
           </li>
         </ul>
             </div>

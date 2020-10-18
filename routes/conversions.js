@@ -7,7 +7,7 @@ router.post('/conversions/addOne', conversionsController.addConversion);
 
 router.get('/conversions/getAllData', conversionsController.getAllData);
 
-router.get('/conversions/inrange/:startDate/:endDate/:conversionName', conversionsController.getData);
+router.get('/conversions/inrange/:startDate/:endDate/:conversionName', conversionsController.getConversionData);
 
 router.get('/conversions/:query', conversionsController.conversionCall);
 

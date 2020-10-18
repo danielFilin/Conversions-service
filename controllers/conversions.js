@@ -1,7 +1,7 @@
 const conversionService = require('../services/conversionService');
-const { ConversionRequest } = require("../dto/conversionRequest");
-const { ConversionCall } = require("../dto/conversionCall");
-const { ConversionDataQuery } = require("../dto/conversionDataQuery");
+const { ConversionRequest } = require("../DTO/conversionRequest");
+const { ConversionCall } = require("../DTO/conversionCall");
+const { ConversionDataQuery } = require("../DTO/conversionDataQuery");
 
 
 exports.addConversion = async(req, res) => {
@@ -12,7 +12,7 @@ exports.addConversion = async(req, res) => {
         }
         const result = await conversionService.addConversion(newConversion);
         if (!result) {
-            throw ('data was not fetched');
+            throw new Error ('data was not fetched');
         }
         res.status(200).json({
             message: 'conversion was added!',
@@ -68,7 +68,7 @@ exports.getAllData = async (req, res) => {
     }
 }
 
-exports.getData = async (req, res) => {
+exports.getConversionData = async (req, res) => {
     try {
         const newQuery = new ConversionDataQuery (req);
         if (!newQuery.validate()) {

@@ -9,23 +9,23 @@ beforeAll( async () => {
 test('Should add new Conversion to DB', async () => {
    await request(index).post('/conversions/addOne').send({
       name: 'new conversion'
-   }).expect(200)
+   }).expect(200);
 });
 
 test('Conversion should not be added, because it exists already', async () => {
    await request(index).post('/conversions/addOne').send({
       name: 'new conversion'
-   }).expect(202)
+   }).expect(202);
 });
 
 test('Conversion should not be added, because we entered an empty string', async () => {
    await request(index).post('/conversions/addOne').send({
       name: ''
-   }).expect(202)
+   }).expect(202);
 });
 
 test('Conversion should not be added, name must be a string', async () => {
    await request(index).post('/conversions/addOne').send({
       name: 33
-   }).expect(202)
+   }).expect(202);
 })

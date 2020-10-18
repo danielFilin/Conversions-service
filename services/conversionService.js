@@ -7,8 +7,15 @@ const addConversion = async (newConversionDTO) => {
     });
     try {
         const result = await newConversion.save();
+        const newAnalytics = new Analytics ({
+            name: newConversionDTO.name,
+            calls: [],
+            totalCalls: 0
+        });
+        await newAnalytics.save();
         return result;
     } catch (err) {
+        console.log(err);
         return false;
     }
 }
@@ -18,20 +25,9 @@ const addConversionCall = async (conversionCallDTO) => {
         const conversion = await Conversion.find({name: conversionCallDTO});
         if (conversion.length) {
             const isCreated = await Analytics.find({name: conversionCallDTO});
-            if (isCreated.length) {
-                isCreated[0].calls.push(Date.now());
-                isCreated[0].totalCalls++;
-                await isCreated[0].save();
-            } else {
-                const newAnalytics = new Analytics ({
-                    name: conversionCallDTO,
-                    calls: [],
-                    totalCalls: 1
-                });
-                newAnalytics.calls.push(Date.now());
-                await newAnalytics.save();
-                return true;
-            }
+            isCreated[0].calls.push(Date.now());
+            isCreated[0].totalCalls++;
+            await isCreated[0].save();
         } else {
             throw new Error('No conversion for the given call!');
         } 
